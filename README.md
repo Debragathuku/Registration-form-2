@@ -1,69 +1,53 @@
-markdown
-Copy code
-# Registration Form Application
+# Registration Form Project
 
-This Java Swing application creates a registration form for users to input their personal details and submit them to a MySQL database. The form includes fields for name, mobile number, date of birth, gender, address, and additional information. Users must accept the terms and conditions before submitting.
+## Description
+
+This project is a Java Swing application for user registration. It includes a form where users can enter their details such as name, mobile number, date of birth, gender, address, and additional information. The data is then stored in a MySQL database. The form also features an area on the right side that displays the filled-in information in a vertical format.
 
 ## Features
 
-- **User Information**: Allows input of name, mobile number, and address.
-- **Date of Birth**: Selectable using dropdowns for day, month, and year.
-- **Gender Selection**: Radio buttons to choose between 'Male' and 'Female'.
-- **Additional Information**: A large text area for extra details.
-- **Terms and Conditions**: Checkbox to accept terms before submission.
-- **Database Integration**: Submits the form data to a MySQL database.
+- **User Registration Form**: Collects user details including name, mobile number, date of birth, gender, address, and additional information.
+- **Database Integration**: Stores user information in a MySQL database.
+- **Real-Time Data Display**: Shows entered data on the right side of the form.
 
 ## Requirements
 
-- Java Development Kit (JDK) 8 or higher
-- MySQL Database
-- XAMPP (for local server and database management)
+- **Java Development Kit (JDK)**: Version 8 or above.
+- **NetBeans IDE**: For running and editing the Java code.
+- **XAMPP**: For managing the MySQL database.
 
-## Installation
+## Setup Instructions
 
-1. **Clone the Repository**: Download the project from GitHub.
+1. **Set Up the Database**
 
-   ```sh
-   git clone https://github.com/yourusername/yourrepository.git
-Set Up Database:
+   - Open XAMPP and start the MySQL server.
+   - Access phpMyAdmin from [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
+   - Create a new database named `registration_db`.
+   - Execute the following SQL script to create the table:
 
-Ensure MySQL is running via XAMPP.
+     ```sql
+     CREATE TABLE `registration` (
+         id INT AUTO_INCREMENT PRIMARY KEY,
+         name VARCHAR(255),
+         mobile VARCHAR(255),
+         dob DATE,
+         address TEXT,
+         gender VARCHAR(50),
+         additional_info TEXT
+     );
+     ```
 
-Create a database named registration_db.
+2. **Configure Database Connection**
 
-Execute the following SQL script to create the required table:
+   - Open `RegistrationForm.java` in NetBeans.
+   - Update the database connection settings in the code if needed:
 
-sql
-Copy code
-CREATE TABLE registration (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    mobile VARCHAR(15),
-    dob DATE,
-    address TEXT,
-    gender VARCHAR(10),
-    additional_info TEXT
-);
-Configure Database Connection:
+     ```java
+     Connection con = DriverManager.getConnection(
+             "jdbc:mysql://localhost:3306/registration_db", "root", "");
+     ```
 
-In the RegistrationForm class, update the DriverManager.getConnection URL if your database configuration is different.
+3. **Run the Application**
 
-java
-Copy code
-Connection con = DriverManager.getConnection(
-    "jdbc:mysql://localhost:3306/registration_db", "root", "");
-Compile and Run:
-
-Open the project in NetBeans or another Java IDE.
-Build and run the project to start the registration form.
-Usage
-Open the application.
-Fill out the fields for name, mobile number, and address.
-Select the date of birth using the dropdown menus.
-Choose your gender.
-Enter any additional information.
-Check the box to accept terms and conditions.
-Click the "Submit" button to save the information to the database.
-Code Overview
-RegistrationForm.java: Contains the main class and Swing components for the registration form.
-Database Connection: Handles form submission and inserts data into the MySQL database.
+   - Compile and run `RegistrationForm.java` in NetBeans.
+   - The application will display a registration form where users can enter their information.
